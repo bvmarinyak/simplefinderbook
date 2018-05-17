@@ -12,8 +12,27 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         android:layout_marginStart="8dp"
+        android:text="Title"
+        app:layout_constraintBottom_toTopOf="@+id/authors_book"
+        app:layout_constraintStart_toEndOf="@+id/image_book" />
+
+    <TextView
+        android:id="@+id/authors_book"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginStart="8dp"
+        android:text="Authors"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/image_book" />
+
+    <ImageView
+        android:id="@+id/image_book"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
-        android:text="Text"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

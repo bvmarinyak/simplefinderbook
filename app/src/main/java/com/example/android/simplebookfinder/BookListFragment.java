@@ -7,11 +7,13 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.android.simplebookfinder.BookModel.BookModel;
 import com.example.android.simplebookfinder.BookModel.Item;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,6 +32,7 @@ public class BookListFragment extends Fragment {
     private BookModel mBookModel;
     private List<Item> mBook;
     private BookAdapter mAdapter;
+    private String authors;
     private static final String API_KEY = "AIzaSyCH7Wnwn1xdLdDUlByVi-nVTxkSoxH3jF4";
 
     @Override
@@ -45,21 +48,44 @@ public class BookListFragment extends Fragment {
         return view;
     }
 
-    private class BookHolder extends RecyclerView.ViewHolder{
+    private class BookHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
         private TextView mTitleTextView;
+        private TextView mAuthorsTextView;
+        private ImageView mBookImageView;
         private Item mBook;
 
         public BookHolder(LayoutInflater inflater, ViewGroup parent){
             super(inflater.inflate(R.layout.list_item_book, parent, false));
+            itemView.setOnClickListener(this);
 
             mTitleTextView = (TextView) itemView.findViewById(R.id.title_book);
+            mAuthorsTextView = (TextView) itemView.findViewById(R.id.authors_book);
+            mBookImageView = (ImageView) itemView.findViewById(R.id.image_book);
 
         }
 
         public void bind(Item book){
             mBook = book;
             mTitleTextView.setText(mBook.getVolumeInfo().getTitle());
+            if(mBook.getVolumeInfo().getAuthors() != null) {
+                for (String str : mBook.getVolumeInfo().getAuthors()) {
+                    authors += str + "\n";
+                }
+            }
+            mAuthorsTextView.setText(authors);
+            authors = "";
+
+            Picasso.get().load(mBook.getVolumeInfo().getImageLinks().getSmallThumbnail())
+                        .placeholder(R.drawable.ic_launcher_background)
+                        .error(R.drawable.ic_launcher_foreground)
+                        .into(mBookImageView);
+
+        }
+
+        @Override
+        public void onClick(View view) {
+            Toast.makeText(getActivity(), "Test", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -107,7 +133,7 @@ public class BookListFragment extends Fragment {
                     mBook.addAll(mBookModel.getItems());
                     mAdapter.notifyDataSetChanged();
                 }else{
-                Toast.makeText(getActivity(), "Error", Toast.LENGTH_SHORT);
+                Toast.makeText(getActivity(), "Error", Toast.LENGTH_SHORT).show();
                 }
 
             }
