@@ -87,18 +87,29 @@ public class BookListFragment extends Fragment {
         public int getItemCount() {
             return mBook.size();
         }
+
+
     }
 
 
     private void updateUI(){
 
         mBook = new ArrayList<>();
+        mAdapter = new BookAdapter(mBook);
+        mBookRecyclerView.setAdapter(mAdapter);
 
         MyApp.getApi().getData("witcher", API_KEY).enqueue(new Callback<BookModel>() {
             @Override
             public void onResponse(Call<BookModel> call, Response<BookModel> response) {
-                mBookModel = response.body();
-                mBook = mBookModel.getItems();
+
+                if(response.isSuccessful()){
+                    mBookModel = response.body();
+                    mBook.addAll(mBookModel.getItems());
+                    mAdapter.notifyDataSetChanged();
+                }else{
+                Toast.makeText(getActivity(), "Error", Toast.LENGTH_SHORT);
+                }
+
             }
 
             @Override
@@ -108,8 +119,6 @@ public class BookListFragment extends Fragment {
             }
         });
 
-        mAdapter = new BookAdapter(mBook);
-        mBookRecyclerView.setAdapter(mAdapter);
 
     }
 
