@@ -30,7 +30,7 @@ import retrofit2.Response;
 public class BookListFragment extends Fragment {
 
     private RecyclerView mBookRecyclerView;
-    private BookModel mBookModel;
+    public static BookModel mBookModel;
     private List<Item> mBook;
     private BookAdapter mAdapter;
     private String authors;
@@ -68,7 +68,11 @@ public class BookListFragment extends Fragment {
 
         public void bind(Item book){
             mBook = book;
+
+            //Заголовок
             mTitleTextView.setText(mBook.getVolumeInfo().getTitle());
+
+            //Автор
             if(mBook.getVolumeInfo().getAuthors() != null) {
                 for (String str : mBook.getVolumeInfo().getAuthors()) {
                     authors += str + "\n";
@@ -76,6 +80,8 @@ public class BookListFragment extends Fragment {
             }
             mAuthorsTextView.setText(authors);
             authors = "";
+
+            //Картинка
 
             Picasso.get().load(mBook.getVolumeInfo().getImageLinks().getSmallThumbnail())
                         .placeholder(R.drawable.ic_launcher_background)

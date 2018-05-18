@@ -13,7 +13,10 @@ public class BookActivity extends SingleFragmentActivity {
     public static final String BOOK_ID = "book_id";
     @Override
     protected Fragment createFragment() {
-        return new BookFragment();
+
+        String bookId = (String) getIntent().getSerializableExtra(BOOK_ID);
+
+        return BookFragment.newInstance(bookId);
     }
 
     public static Intent newIntent(Context packageContext, String bookId){
