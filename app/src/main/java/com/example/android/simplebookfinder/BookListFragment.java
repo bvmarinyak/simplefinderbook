@@ -30,10 +30,10 @@ import retrofit2.Response;
 public class BookListFragment extends Fragment {
 
     private RecyclerView mBookRecyclerView;
-    public static BookModel mBookModel;
+    private BookModel mBookModel;
     private List<Item> mBook;
     private BookAdapter mAdapter;
-    private String authors;
+    private String authors = "";
     private static final String API_KEY = "AIzaSyCH7Wnwn1xdLdDUlByVi-nVTxkSoxH3jF4";
 
     @Override
@@ -83,10 +83,14 @@ public class BookListFragment extends Fragment {
 
             //Картинка
 
-            Picasso.get().load(mBook.getVolumeInfo().getImageLinks().getSmallThumbnail())
+            if(mBook.getVolumeInfo().getImageLinks().getSmallThumbnail() != null) {
+                Picasso.get().load(mBook.getVolumeInfo().getImageLinks().getSmallThumbnail())
                         .placeholder(R.drawable.ic_launcher_background)
                         .error(R.drawable.ic_launcher_foreground)
                         .into(mBookImageView);
+            }else{
+                mBookImageView.setImageResource(R.drawable.ic_launcher_foreground);
+            }
 
         }
 
@@ -140,6 +144,7 @@ public class BookListFragment extends Fragment {
                     mBookModel = response.body();
                     mBook.addAll(mBookModel.getItems());
                     mAdapter.notifyDataSetChanged();
+                    BookList.get().setBookList(mBook);
                 }else{
                 Toast.makeText(getActivity(), "Error", Toast.LENGTH_SHORT).show();
                 }
