@@ -48,13 +48,13 @@ public class BookFragment extends Fragment {
 
 
         mBookImageView = (ImageView) view.findViewById(R.id.imageView);
-        if(mBook.getVolumeInfo().getImageLinks().getThumbnail() != null) {
+        if(mBook.getVolumeInfo().getImageLinks() != null) {
             Picasso.get().load(mBook.getVolumeInfo().getImageLinks().getThumbnail())
                     .placeholder(R.drawable.ic_launcher_background)
-                    .error(R.drawable.ic_launcher_foreground)
+                    .error(R.drawable.ic_launcher_background)
                     .into(mBookImageView);
         }else{
-            mBookImageView.setImageResource(R.drawable.ic_launcher_foreground);
+            mBookImageView.setImageResource(R.drawable.ic_launcher_background);
         }
 
         mBookTitle = (TextView) view.findViewById(R.id.book_title);

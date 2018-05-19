@@ -5,7 +5,11 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SearchView;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -37,6 +41,13 @@ public class BookListFragment extends Fragment {
     private static final String API_KEY = "AIzaSyCH7Wnwn1xdLdDUlByVi-nVTxkSoxH3jF4";
 
     @Override
+    public void onCreate(Bundle savedInstanceState){
+        super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
+    }
+
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState){
         View view = inflater.inflate(R.layout.fragment_book_list, container, false);
@@ -44,10 +55,37 @@ public class BookListFragment extends Fragment {
         mBookRecyclerView = (RecyclerView) view.findViewById(R.id.book_recycler_view);
         mBookRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-        updateUI();
+        createAdapter();
 
         return view;
     }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater menuInflater){
+        super.onCreateOptionsMenu(menu, menuInflater);
+        menuInflater.inflate(R.menu.fragment_book_list, menu);
+
+        MenuItem searchItem = menu.findItem(R.id.menu_item_search);
+        final SearchView searchView = (SearchView) searchItem.getActionView();
+        //searchView.setIconifiedByDefault(false);
+
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                updateUI(query);
+                return true;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                mBook.clear();
+                mAdapter.notifyDataSetChanged();
+                return true;
+            }
+        });
+    }
+
 
     private class BookHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
@@ -83,13 +121,14 @@ public class BookListFragment extends Fragment {
 
             //Картинка
 
-            if(mBook.getVolumeInfo().getImageLinks().getSmallThumbnail() != null) {
-                Picasso.get().load(mBook.getVolumeInfo().getImageLinks().getSmallThumbnail())
+            if(mBook.getVolumeInfo().getImageLinks() != null) {
+
+                Picasso.get().load(mBook.getVolumeInfo().getImageLinks().getThumbnail())
                         .placeholder(R.drawable.ic_launcher_background)
-                        .error(R.drawable.ic_launcher_foreground)
+                        .error(R.drawable.ic_launcher_background)
                         .into(mBookImageView);
             }else{
-                mBookImageView.setImageResource(R.drawable.ic_launcher_foreground);
+                mBookImageView.setImageResource(R.drawable.ic_launcher_background);
             }
 
         }
@@ -130,13 +169,17 @@ public class BookListFragment extends Fragment {
     }
 
 
-    private void updateUI(){
-
+    private void createAdapter(){
         mBook = new ArrayList<>();
         mAdapter = new BookAdapter(mBook);
         mBookRecyclerView.setAdapter(mAdapter);
+    }
 
-        MyApp.getApi().getData("witcher", API_KEY).enqueue(new Callback<BookModel>() {
+
+    private void updateUI(String parameter){
+
+
+        MyApp.getApi().getData(parameter, API_KEY).enqueue(new Callback<BookModel>() {
             @Override
             public void onResponse(Call<BookModel> call, Response<BookModel> response) {
 
