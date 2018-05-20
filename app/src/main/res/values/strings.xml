@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">SimpleBookFinder</string>
     <string name="search">Поиск</string>
+    <string name="query">Введите ваш запрос</string>
 </resources>

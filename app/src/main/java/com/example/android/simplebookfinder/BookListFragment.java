@@ -13,6 +13,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -37,7 +38,6 @@ public class BookListFragment extends Fragment {
     private BookModel mBookModel;
     private List<Item> mBook;
     private BookAdapter mAdapter;
-    private String authors = "";
     private static final String API_KEY = "AIzaSyCH7Wnwn1xdLdDUlByVi-nVTxkSoxH3jF4";
 
     @Override
@@ -55,6 +55,7 @@ public class BookListFragment extends Fragment {
         mBookRecyclerView = (RecyclerView) view.findViewById(R.id.book_recycler_view);
         mBookRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
+
         createAdapter();
 
         return view;
@@ -65,15 +66,18 @@ public class BookListFragment extends Fragment {
         super.onCreateOptionsMenu(menu, menuInflater);
         menuInflater.inflate(R.menu.fragment_book_list, menu);
 
+
         MenuItem searchItem = menu.findItem(R.id.menu_item_search);
         final SearchView searchView = (SearchView) searchItem.getActionView();
-        //searchView.setIconifiedByDefault(false);
+
+        searchView.setIconified(false);
 
 
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
                 updateUI(query);
+                searchView.clearFocus();
                 return true;
             }
 
@@ -93,6 +97,7 @@ public class BookListFragment extends Fragment {
         private TextView mAuthorsTextView;
         private ImageView mBookImageView;
         private Item mBook;
+        private String authors = "";
 
         public BookHolder(LayoutInflater inflater, ViewGroup parent){
             super(inflater.inflate(R.layout.list_item_book, parent, false));
