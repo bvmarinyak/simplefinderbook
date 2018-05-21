@@ -1,6 +1,8 @@
 package com.example.android.simplebookfinder;
 
 import android.content.Intent;
+import android.graphics.Rect;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -61,6 +63,7 @@ public class BookListFragment extends Fragment {
         return view;
     }
 
+
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater menuInflater){
         super.onCreateOptionsMenu(menu, menuInflater);
@@ -118,7 +121,7 @@ public class BookListFragment extends Fragment {
             //Автор
             if(mBook.getVolumeInfo().getAuthors() != null) {
                 for (String str : mBook.getVolumeInfo().getAuthors()) {
-                    authors += str + "\n";
+                    authors += str + "  ";
                 }
             }
             mAuthorsTextView.setText(authors);

@@ -12,28 +12,32 @@
 
         <ImageView
             android:id="@+id/imageView"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:layout_gravity="center"/>
+            android:layout_width="128dp"
+            android:layout_height="197dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="16dp"
+            android:scaleType="fitXY"/>
 
         <TextView
             android:id="@+id/book_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="book_title"
-            android:layout_gravity="center"/>
+            android:layout_gravity="center"
+            android:layout_marginTop="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"/>
 
         <TextView
             android:id="@+id/book_authors"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="book_authors"
-            android:layout_gravity="center"/>
+            android:layout_gravity="center" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:layout_marginTop="16dp">
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -45,13 +49,12 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Страниц:!" />
+                    android:text="@string/page_count" />
 
                 <TextView
                     android:id="@+id/page_count"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="page_count" />
+                    android:layout_height="wrap_content"/>
 
             </LinearLayout>
 
@@ -65,13 +68,12 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Дата издания:!" />
+                    android:text="@string/published_date" />
 
                 <TextView
                     android:id="@+id/published_date"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="published_date" />
+                    android:layout_height="wrap_content" />
 
             </LinearLayout>
 
@@ -82,30 +84,38 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Описание книги:!"
-            android:layout_gravity="center"/>
+            android:text="@string/description"
+            android:layout_gravity="center"
+            android:layout_marginTop="16dp"/>
 
         <TextView
             android:id="@+id/description"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="description" />
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:textSize="14dp"
+            android:lineSpacingMultiplier="1.4"
+            android:layout_marginTop="8dp"/>
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:layout_marginTop="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginBottom="16dp">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Издатель:!" />
+                android:text="@string/publisher" />
 
             <TextView
                 android:id="@+id/publisher"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="publisher" />
+                android:layout_height="wrap_content" />
 
         </LinearLayout>
 

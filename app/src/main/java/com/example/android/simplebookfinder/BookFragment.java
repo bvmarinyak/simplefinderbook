@@ -95,7 +95,7 @@ public class BookFragment extends Fragment {
         mBookPublisher = (TextView) view.findViewById(R.id.publisher);
 
         if(mBook.getVolumeInfo().getPublisher() != null) {
-            mBookPublisher.setText(mBook.getVolumeInfo().getPublisher());
+            mBookPublisher.setText(" " + mBook.getVolumeInfo().getPublisher());
         }else{
             mBookPublisher.setText("");
         }
