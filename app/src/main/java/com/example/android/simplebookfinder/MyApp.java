@@ -21,10 +21,10 @@ public class MyApp extends Application {
         super.onCreate();
 
         retrofit = new Retrofit.Builder()
-                .baseUrl("https://www.googleapis.com/") //Базовая часть адреса
-                .addConverterFactory(GsonConverterFactory.create()) //Конвертер, необходимый для преобразования JSON'а в объекты
+                .baseUrl("https://www.googleapis.com/") 
+                .addConverterFactory(GsonConverterFactory.create()) 
                 .build();
-        sBookApi = retrofit.create(BookApi.class); //Создаем объект, при помощи которого будем выполнять запросы
+        sBookApi = retrofit.create(BookApi.class); 
     }
 
     public static BookApi getApi() {
