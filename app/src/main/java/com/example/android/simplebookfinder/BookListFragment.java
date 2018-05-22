@@ -38,7 +38,7 @@ public class BookListFragment extends Fragment {
     private BookModel mBookModel;
     private List<Item> mBook;
     private BookAdapter mAdapter;
-    private static final String API_KEY = "AIzaSyCH7Wnwn1xdLdDUlByVi-nVTxkSoxH3jF4";
+    private static final String API_KEY = "Введите ваш ключ";
 
     @Override
     public void onCreate(Bundle savedInstanceState){
