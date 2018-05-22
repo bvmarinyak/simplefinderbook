@@ -1,8 +1,7 @@
 package com.example.android.simplebookfinder;
 
 import android.content.Intent;
-import android.graphics.Rect;
-import android.os.Build;
+
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -15,7 +14,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -106,6 +104,7 @@ public class BookListFragment extends Fragment {
             super(inflater.inflate(R.layout.list_item_book, parent, false));
             itemView.setOnClickListener(this);
 
+
             mTitleTextView = (TextView) itemView.findViewById(R.id.title_book);
             mAuthorsTextView = (TextView) itemView.findViewById(R.id.authors_book);
             mBookImageView = (ImageView) itemView.findViewById(R.id.image_book);
@@ -115,10 +114,8 @@ public class BookListFragment extends Fragment {
         public void bind(Item book){
             mBook = book;
 
-            //Заголовок
             mTitleTextView.setText(mBook.getVolumeInfo().getTitle());
 
-            //Автор
             if(mBook.getVolumeInfo().getAuthors() != null) {
                 for (String str : mBook.getVolumeInfo().getAuthors()) {
                     authors += str + "  ";
@@ -127,7 +124,6 @@ public class BookListFragment extends Fragment {
             mAuthorsTextView.setText(authors);
             authors = "";
 
-            //Картинка
 
             if(mBook.getVolumeInfo().getImageLinks() != null) {
 

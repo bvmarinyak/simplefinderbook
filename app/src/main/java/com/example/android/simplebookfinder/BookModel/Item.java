@@ -4,10 +4,12 @@ package com.example.android.simplebookfinder.BookModel;
  * Created by bvmarinyak on 17.05.18.
  */
 
+
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Item {
+public class Item{
 
     @SerializedName("kind")
     @Expose

@@ -1,17 +1,15 @@
 package com.example.android.simplebookfinder;
 
 import android.os.Bundle;
-import android.provider.ContactsContract;
+
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.android.simplebookfinder.BookModel.BookModel;
 import com.example.android.simplebookfinder.BookModel.Item;
 import com.squareup.picasso.Picasso;
 
